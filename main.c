@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
     fprintf(stdout,"Magicnumber: %c, %c\n",m1,m2);
     if ( m1=='P' && m2 == '5')
     {
-        fscanf(fp,"%c",&temp);
+        fscanf(fp,"%c%*c",&temp);
         fprintf(stdout,"Comment is: %c",temp);
         while (temp=='#')
         {
@@ -112,8 +112,8 @@ int main(int argc, const char * argv[]) {
 			
 			}
 
-			freqreal[i][j]*=multi;
-			freqimaginary[i][j]*=multi;
+			//freqreal[i][j]*=multi;
+			//freqimaginary[i][j]*=multi;
 	//	fprintf(stdout,"i: %d j: %d real:%lf ima: %lf\n",i,j,freqreal[i][j], freqimaginary[i][j]);	
 
 		}
@@ -125,7 +125,8 @@ int main(int argc, const char * argv[]) {
 	sprintf(comment,"%d %d",width_col,height_row);	
 	fprintf(output,"\n%s",comment);
 	sprintf(comment,"%d",maxval);
-	fprintf(output,"\n%s",comment);
+	fprintf(output,"\n%s ",comment);
+	fflush(output);
 	tempdouble=0;
 	for(i=0;i<height_row;i++)
 	{
@@ -152,13 +153,13 @@ int main(int argc, const char * argv[]) {
 //fprintf(stdout,"test1:%lf\n",test1);
 				}	
 			}
-		temp=(char)test1;
-		fprintf(output,"%c",temp);
-		fprintf(stdout,"%d ",(int)temp);
+		temp=(char)(test1*multi);
+		fwrite(&temp,sizeof(temp),1,output);
+		fprintf(stdout,"%d ",(int)test1);
 		}
 		
 
-		fprintf(stdout,"\n");
+		//fprintf(output,"\n");
 	}	
 
     }
